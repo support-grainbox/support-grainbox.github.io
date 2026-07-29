@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grain Box — Director / DP</title>
+<meta name="description" content="Grain Box — Director &amp; Director of Photography. Documentary, editorial and commercial work.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Direct MP4 URL required for BG (YouTube watch/embed links won't play in <video>). Swap src anytime. -->
+<div class="bg-video" aria-hidden="true">
+  <video
+    class="bg-video__media"
+    id="bg-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="auto"
+  >
+    <source src="https://videos.pexels.com/video-files/3571264/3571264-hd_1280_720_30fps.mp4" type="video/mp4">
+  </video>
+  <div class="bg-video__scrim"></div>
+</div>
+
+<div class="ruler ruler--left" aria-hidden="true"></div>
+<div class="ruler ruler--right" aria-hidden="true"></div>
+<div class="rec-dot" aria-hidden="true"></div>
+
+<header class="site-header">
+  <a href="#" class="logo" data-page="work" aria-label="Grain Box — Home">
+    <img class="logo__img" src="assets/logo.png" alt="Grain Box" width="240" height="96">
+  </a>
+
+  <nav class="nav" aria-label="Primary">
+    <button class="nav__link" data-page="work" data-sub="slider">WORK</button>
+    <button class="nav__link" data-page="archive">ARCHIVE</button>
+    <button class="nav__link" data-page="about">ABOUT</button>
+    <button class="nav__link" data-page="contact">CONTACT</button>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ WORK ============ -->
+  <section class="view" id="view-work" data-view="work">
+
+    <div class="work-slider" id="work-slider">
+      <div class="work-slider__title-left" id="work-title-left"></div>
+      <div class="work-slider__title-right" id="work-title-right"></div>
+
+      <div class="work-slider__frame viewfinder" id="work-frame">
+        <span class="corner corner--tl"></span>
+        <span class="corner corner--tr"></span>
+        <span class="corner corner--bl"></span>
+        <span class="corner corner--br"></span>
+        <div class="work-slider__tag work-slider__tag--left" id="work-tag-left"></div>
+        <div class="work-slider__tag work-slider__tag--right" id="work-tag-right"></div>
+        <div class="ph ph--media" id="work-media"></div>
+      </div>
+
+      <div class="work-slider__meta">
+        <span id="work-index">01.</span>
+        <span id="work-client">Amazon Originals</span>
+        <span id="work-count">.06</span>
+      </div>
+    </div>
+
+    <div class="work-list" id="work-list"></div>
+
+  </section>
+
+  <!-- ============ ARCHIVE ============ -->
+  <section class="view" id="view-archive" data-view="archive">
+    <div class="archive__intro">
+      <span class="eyebrow">08. SELECTED FRAMES / STILLS</span>
+      <h2 data-dropcap>Selected Archive</h2>
+      <span class="archive__client">GRAIN BOX / OCEAN</span>
+    </div>
+    <div class="archive__grid" id="archive-grid"></div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="view" id="view-about" data-view="about">
+
+    <div class="about-hero">
+      <div class="about-hero__center">
+        <span class="eyebrow">ABOUT</span>
+        <h1 class="about-hero__name" data-dropcap>Grain Box</h1>
+        <span class="about-hero__role">CREATIVE STUDIO</span>
+        <div class="about-hero__icons">
+          <span>F</span><span>M</span><span>B</span>
+        </div>
+        <p class="about-hero__founder">
+          FILM · MUSIC VIDEO · BRAND,<br>
+          OCEAN EDIT / OCEAN MUSIC,<br>
+          POST &amp; CINEMATOGRAPHY
+        </p>
+      </div>
+    </div>
+
+    <div class="about-bio">
+      <div class="about-bio__portrait ph ph--portrait"><img src="assets/about-portrait.jpg" alt="Portrait still"></div>
+      <div class="about-bio__text">
+        <p>Grain Box is a cinematic creative studio working across short film, music video, and brand campaigns. The work favors raw human frames — festival shorts, studio athletics, beauty product films, and music visuals shaped with Ocean Edit / Ocean Music.</p>
+        <p>Recent film work includes A Little Space We All Need (Pratibha Production) — Honorable Mention at Film That Move Jamaica 2025 and Official Selection at the Indian Independent Film Festival and Amader International Short Film Festival — and The Last Yug with Himalayan Oracle Films, where cinematography and DI/VFX sit with Samir Patel and Sagar Unagar.</p>
+        <p>Music video credits span Highover (BAWA BELT), Tere Siva (Ocean Music — Sagar Unagar &amp; Payal Tailor), and Adhura Muqadma (Ocean), alongside commercial campaigns for COITONIC athletics and Infinium Tecginics skincare.</p>
+        <p>Selected collaborators and houses include</p>
+        <p class="about-bio__brands">Pratibha Production, Himalayan Oracle Films, Ocean Music, Ocean Edit, Elysian, BAWA BELT / Mafia Origins, COITONIC, and Infinium Tecginics.</p>
+        <p>Watch the Showreel 2026 and project cuts on YouTube and Instagram — click any Work card to open the linked piece.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="view" id="view-contact" data-view="contact">
+    <div class="contact">
+      <span class="eyebrow">GET IN TOUCH</span>
+      <h1 data-dropcap>Let's work together</h1>
+      <a class="contact__email" href="mailto:hello@grainbox.in">hello@grainbox.in</a>
+      <div class="contact__socials">
+        <a href="https://www.instagram.com/reel/DLwxP5Jx4aO/" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://youtu.be/_m_ax-qDtto" target="_blank" rel="noopener">YOUTUBE</a>
+        <a href="https://youtu.be/ASsEL4rFOZ4" target="_blank" rel="noopener">OCEAN</a>
+      </div>
+      <p class="contact__rep">Film, music video &amp; brand work — Grain Box / Ocean.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <span class="footer__copy">© 2026 Grain Box</span>
+
+  <div class="footer__mode" id="work-mode-toggle">
+    <button class="is-active" data-mode="slider">SLIDER</button>
+    <span>/</span>
+    <button data-mode="list">LIST</button>
+  </div>
+
+  <div class="footer__filters" id="footer-filters">
+    <span class="footer__filters-item is-active" data-filter="all">ALL <em id="filter-count">(08)</em></span>
+    <span class="footer__filters-item" data-filter="TV & Film">TV &amp; FILM</span>
+    <span class="footer__filters-item" data-filter="Commercial">COMMERCIAL</span>
+    <span class="footer__filters-item" data-filter="Editorial">EDITORIAL</span>
+  </div>
+
+  <span class="footer__clock" id="clock">00:00:00</span>
+</footer>
+
+<!-- YouTube player modal -->
+<div class="video-modal" id="video-modal" aria-hidden="true">
+  <button class="video-modal__close" id="video-close" aria-label="Close video">&times;</button>
+  <div class="video-modal__frame">
+    <iframe id="video-frame" title="Project video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
