@@ -195,8 +195,8 @@ function renderSlider(animate = true){
     slider.classList.add('is-swap');
   }
 
-  document.getElementById('work-title-left').innerHTML  = dropcap(parts.left);
-  document.getElementById('work-title-right').innerHTML = dropcap(parts.right);
+  document.getElementById('work-title-left').textContent  = parts.left;
+  document.getElementById('work-title-right').textContent = parts.right;
   document.getElementById('work-tag-left').textContent  = w.category;
   document.getElementById('work-tag-right').textContent = w.tag.toUpperCase();
   media.setAttribute('data-label', w.client);
@@ -230,6 +230,42 @@ document.getElementById('view-work').addEventListener('wheel', (e) => {
   advanceWork(e.deltaY > 0 ? 1 : -1);
   setTimeout(() => { wheelLock = false; }, 500);
 }, { passive: false });
+
+/* Mobile: vertical swipe changes work slides (wheel events don't fire on phones) */
+(function initWorkTouchSwipe(){
+  const view = document.getElementById('view-work');
+  if (!view) return;
+  let startY = 0;
+  let startX = 0;
+  let tracking = false;
+
+  view.addEventListener('touchstart', (e) => {
+    if (!view.classList.contains('is-active') || view.classList.contains('mode-list')) return;
+    if (e.touches.length !== 1) return;
+    tracking = true;
+    startY = e.touches[0].clientY;
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+
+  view.addEventListener('touchmove', (e) => {
+    if (!tracking) return;
+    if (!view.classList.contains('is-active') || view.classList.contains('mode-list')) return;
+    e.preventDefault();
+  }, { passive: false });
+
+  view.addEventListener('touchend', (e) => {
+    if (!tracking) return;
+    tracking = false;
+    if (!view.classList.contains('is-active') || view.classList.contains('mode-list')) return;
+    const touch = e.changedTouches[0];
+    if (!touch) return;
+    const dy = touch.clientY - startY;
+    const dx = touch.clientX - startX;
+    if (Math.abs(dy) < 36) return;
+    if (Math.abs(dy) < Math.abs(dx) * 1.1) return;
+    advanceWork(dy < 0 ? 1 : -1);
+  }, { passive: true });
+})();
 
 /* ==========================================================================
    WORK — LIST
