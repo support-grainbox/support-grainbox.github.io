@@ -150,8 +150,7 @@ function showPage(page){
   });
 
   setActiveNav(page);
-  workModeToggle.style.display = page === 'work' ? 'flex' : 'none';
-  footerFilters.style.display = page === 'work' ? 'flex' : 'none';
+  document.body.classList.toggle('is-work', page === 'work');
   document.getElementById('main').scrollTop = 0;
   const activeView = document.querySelector('.view.is-active');
   if (activeView) activeView.scrollTop = 0;
@@ -195,8 +194,19 @@ function renderSlider(animate = true){
     slider.classList.add('is-swap');
   }
 
-  document.getElementById('work-title-left').textContent  = parts.left;
-  document.getElementById('work-title-right').textContent = parts.right;
+  // On narrow screens show the full title as one block (avoids split looking broken)
+  const narrow = window.matchMedia('(max-width: 900px)').matches;
+  const titleLeft = document.getElementById('work-title-left');
+  const titleRight = document.getElementById('work-title-right');
+  if (narrow){
+    titleLeft.textContent = w.title;
+    titleRight.textContent = '';
+    titleRight.setAttribute('hidden', '');
+  } else {
+    titleLeft.textContent = parts.left;
+    titleRight.textContent = parts.right;
+    titleRight.removeAttribute('hidden');
+  }
   document.getElementById('work-tag-left').textContent  = w.category;
   document.getElementById('work-tag-right').textContent = w.tag.toUpperCase();
   media.setAttribute('data-label', w.client);
@@ -213,6 +223,12 @@ function advanceWork(delta){
   renderSlider(true);
   setTimeout(() => { workAnimating = false; }, 420);
 }
+
+window.matchMedia('(max-width: 900px)').addEventListener('change', () => {
+  if (document.getElementById('view-work')?.classList.contains('is-active')){
+    renderSlider(false);
+  }
+});
 
 document.getElementById('work-frame').addEventListener('click', () => {
   const w = filteredWorks()[workIndex];
@@ -302,13 +318,26 @@ workModeToggle.addEventListener('click', (e) => {
 footerFilters.addEventListener('click', (e) => {
   const item = e.target.closest('.footer__filters-item');
   if (!item) return;
-  [...footerFilters.querySelectorAll('.footer__filters-item')].forEach(i => i.classList.toggle('is-active', i === item));
-  workFilter = item.dataset.filter === 'all' ? 'all' : item.dataset.filter;
+  applyWorkFilter(item.dataset.filter);
+});
+
+document.getElementById('work-filters')?.addEventListener('click', (e) => {
+  const item = e.target.closest('.footer__filters-item');
+  if (!item) return;
+  applyWorkFilter(item.dataset.filter);
+});
+
+function applyWorkFilter(filter){
+  workFilter = filter === 'all' ? 'all' : filter;
   workIndex = 0;
+  document.querySelectorAll('.footer__filters-item').forEach(i => {
+    i.classList.toggle('is-active', i.dataset.filter === filter);
+  });
   renderSlider(true);
   renderList();
-  document.getElementById('filter-count').textContent = '(' + String(filteredWorks().length).padStart(2,'0') + ')';
-});
+  const count = '(' + String(filteredWorks().length).padStart(2,'0') + ')';
+  document.querySelectorAll('.filter-count').forEach(node => { node.textContent = count; });
+}
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape'){
@@ -381,4 +410,6 @@ tickClock();
 
 currentPage = null;
 showPage('work');
-document.getElementById('filter-count').textContent = '(' + String(WORKS.length).padStart(2,'0') + ')';
+document.querySelectorAll('.filter-count').forEach(node => {
+  node.textContent = '(' + String(WORKS.length).padStart(2,'0') + ')';
+});
